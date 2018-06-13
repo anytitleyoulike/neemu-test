@@ -1,0 +1,17 @@
+{
+  "name": "neemu-test",
+  "version": "1.0.0",
+  "description": "assignment test for neemu",
+  "main": "src/loader.js",
+  "scripts": {
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marcello Cordeiro",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "express": "^4.16.3",
+    "nodemon": "^1.17.5"
+  }
+}
