@@ -1,14 +1,22 @@
 const express = require('express');
+const fs = require('fs');
+const routes = require('./server.js');
 
-module.exports = function(server) {
-    const router = express.Router();
-    server.use('/api', router);
+routes.get('/itens', function (req, res) {
 
-    server.get('/', function (req, res) {
-        res.send('helloworld');
-    });
-    server.get('/produtos', function (req, res) {
-        res.send('pagina dos produtos');
-    });
+    let itensJson = fs.readFileSync('modelo-resposta-api.json');
+    let itens = JSON.parse(itensJson);
 
-}
+    res.send(itens);
+});
+
+routes.get('/itens/recommendation/:id', function (req, res) {
+
+    let itensJson = fs.readFileSync('modelo-resposta-api.json');
+    let itens = JSON.parse(itensJson);
+
+    let filterItem = itens.data.recommendation.filter(elem => elem.businessId === req.params.id);
+    res.send(filterItem);
+});
+
+module.exports = routes;
