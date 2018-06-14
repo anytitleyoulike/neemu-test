@@ -1,22 +1,10 @@
 const express = require('express');
-const fs = require('fs');
+
 const routes = require('./server.js');
+const itemController = require('../controller/itemController')
 
-routes.get('/itens', function (req, res) {
+routes.get('/itens', itemController.get);
 
-    let itensJson = fs.readFileSync('modelo-resposta-api.json');
-    let itens = JSON.parse(itensJson);
-
-    res.send(itens);
-});
-
-routes.get('/itens/recommendation/:id', function (req, res) {
-
-    let itensJson = fs.readFileSync('modelo-resposta-api.json');
-    let itens = JSON.parse(itensJson);
-
-    let filterItem = itens.data.recommendation.filter(elem => elem.businessId === req.params.id);
-    res.send(filterItem);
-});
+routes.get('/itens/recommendation/:id', itemController.getRecommendation);
 
 module.exports = routes;
